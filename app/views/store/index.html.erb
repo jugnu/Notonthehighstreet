@@ -1,0 +1,20 @@
+<h1>Products</h1>
+<% if @products.size > 0 %>
+<% @products.each do |product| -%>
+  <div class="entry">
+    <h3><%= product.product_code %></h3>
+    <%= product.name %>
+    <div class="price-line">
+      <span class="price"><%= number_to_currency(product.price) %></span>
+      <!-- START_HIGHLIGHT -->
+      <!-- START:add_to_cart -->
+      <%= link_to_remote "Add To Basket", :url => {:action => "add_to_cart", :product_id => product} %>
+      <!-- END:add_to_cart -->
+      <!-- END_HIGHLIGHT -->
+    </div>
+  </div>
+-----------------------------------------------------------------
+<% end %>
+<% else %>
+  <p> There is no product in database. you can create products by </p> <%= link_to "Clicking here", :controller => "products", :action => "new"%>
+<% end %>

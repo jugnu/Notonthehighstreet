@@ -1,0 +1,37 @@
+<% if @cart %>
+  <h3>Your Basket</h3><%= button_to 'Empty cart', :action => 'empty_cart' %>
+  <br/>
+
+  <br/>
+  <p>10% discount on $60 sale</p>
+  <table border="1">
+    <tr>
+      <th>Quantity</th>
+      <th>Name</th>
+      <th>Unit Price</th>
+    </tr>
+  
+                          <% for item in @cart.items %>
+      <tr>
+        <td><%= item.quantity %></td>  
+        <td><%= item.title %></td>  
+        <td><%= number_to_currency(item.price) %></td>  
+    
+      </tr>  
+    <% end %>
+  </table>
+
+  <div>
+    Total Price: 
+    <%= number_to_currency(@cart.total_price) %>
+    
+  </div>
+  <div>
+    Discount:  
+  
+    <%= number_to_currency(@cart.discount) %>
+  </div>
+
+        
+                    <%= button_to 'CheckOut', :action => 'checkout' %>
+  <% end %>
